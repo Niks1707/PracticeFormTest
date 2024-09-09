@@ -1,25 +1,23 @@
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import java.io.File;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTests {
 
     @BeforeAll
-    static void BeforeAll() {
+    static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
-
     }
 
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Ivan");
         $("#lastName").setValue("Ivanov");
         $("#userEmail").setValue("iivanov@gmail.com");
@@ -31,12 +29,11 @@ public class PracticeFormTests {
         $(".react-datepicker__day--028").click();
         $("#subjectsInput").setValue("Physic").pressEnter();
         $("#hobbiesWrapper").find("label[for='hobbies-checkbox-1']").click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/test.png"));
+        $("#uploadPicture").uploadFromClasspath("test.png");
         $("#currentAddress").setValue("Lenina street");
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Gurgaon").pressEnter();
         $("#submit").click();
-
 
         $(".modal-body").shouldHave(text("Ivan Ivanov"));
         $(".modal-body").shouldHave(text("iivanov@gmail.com"));
@@ -48,5 +45,4 @@ public class PracticeFormTests {
         $(".modal-body").shouldHave(text("NCR Gurgaon"));
         $("#closeLargeModal").click();
     }
-
 }
