@@ -27,7 +27,7 @@ public class FindJUnit5SoftAssertionsTest {
                   void test() {
                     Configuration.assertionMode = SOFT;
                     open("page.html");
-                                
+                
                     $("#first").should(visible).click();
                     $("#second").should(visible).click();
                   }
@@ -37,12 +37,12 @@ public class FindJUnit5SoftAssertionsTest {
                 class Tests {
                   @RegisterExtension
                   static SoftAssertsExtension softAsserts = new SoftAssertsExtension();
-                                
+                
                   @Test
                   void test() {
                     Configuration.assertionMode = SOFT;
                     open("page.html");
-                                
+                
                     $("#first").should(visible).click();
                     $("#second").should(visible).click();
                   }
