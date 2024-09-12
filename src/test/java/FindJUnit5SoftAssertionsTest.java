@@ -3,8 +3,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FindJUnit5SoftAssertionsTest {
 
@@ -34,5 +33,19 @@ public class FindJUnit5SoftAssertionsTest {
                   }
                 }
                 """));
+        $("#wiki-body").shouldHave(text("""
+                class Tests {
+                  @RegisterExtension
+                  static SoftAssertsExtension softAsserts = new SoftAssertsExtension();
+                                
+                  @Test
+                  void test() {
+                    Configuration.assertionMode = SOFT;
+                    open("page.html");
+                                
+                    $("#first").should(visible).click();
+                    $("#second").should(visible).click();
+                  }
+                }"""));
     }
 }
