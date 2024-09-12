@@ -8,14 +8,14 @@ import static com.codeborne.selenide.Selenide.*;
 public class FindJUnit5SoftAssertionsTest {
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://github.com";
     }
 
     @Test
-    void jUnit5inSoftAssertions() {
+    void jUnit5inSoftAssertionsTest() {
         open("/selenide/selenide");
         $("#wiki-tab").click();
         Selenide.executeJavaScript("window.scrollBy(0,500);");//добавила скролл, т.к. не проходит тест на ноутбуке
