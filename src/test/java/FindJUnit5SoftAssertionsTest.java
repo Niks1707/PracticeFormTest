@@ -1,7 +1,7 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -13,14 +13,14 @@ public class FindJUnit5SoftAssertionsTest {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://github.com";
-        //Configuration.holdBrowserOpen = true;
     }
 
     @Test
     void jUnit5inSoftAssertions() {
         open("/selenide/selenide");
         $("#wiki-tab").click();
-        $("#wiki-body").$("[href*='SoftAssertions']").click();
+        Selenide.executeJavaScript("window.scrollBy(0,500);");//добавила скролл, т.к. не проходит тест на ноутбуке
+        $("[href*='SoftAssertions']").click();
         $("#wiki-body").shouldHave(text("""
                 @ExtendWith({SoftAssertsExtension.class})
                 class Tests {
