@@ -27,9 +27,7 @@ public class MoveAToBTest {
     @Test
     void dragAndDropTests() {
         open("/drag_and_drop");
-        SelenideElement elementA = $("#column-a");
-        SelenideElement elementB = $("#column-b");
-        $(elementA).dragAndDrop(to(elementB));
+        $("#column-a").dragAndDrop(to("#column-b"));
         $("#column-b").shouldHave(text("A"));
     }
 
